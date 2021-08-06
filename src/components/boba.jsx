@@ -4,7 +4,7 @@ const Boba = () => {
     const [items, setItems] = useState(null)
 
     const getBoba = async () => {
-        const r = await fetch("http://localhost:8000/boba", {
+        const r = await fetch(`${process.env.REACT_APP_API_URL}/boba`, {
             method: "GET",
         })
         const json = await r.json()
@@ -29,7 +29,6 @@ const Boba = () => {
     useEffect(() => {
         getBoba()
     }, [])
-
 
     return (
         <div>
