@@ -40,11 +40,13 @@
 h1.boba {
     color: #61dafb;
     text-align: center;
+    font-family: "Comic Sans MS";
     font-size: 80px;
 }
 
 p {
     text-align: center;
+    font-family: "Comic Sans MS";
     color: black;
     font-size: x-large;
 }
