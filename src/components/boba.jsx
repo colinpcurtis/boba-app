@@ -9,8 +9,8 @@ const Boba = () => {
     const [error, setError] = useState(null)
 
     const getBoba = async () => {
-        const url = "http://localhost:8000/boba/" + server
-        const r = await fetch(url, {  // `${process.env.REACT_APP_API_URL}/boba`
+        const url = `${process.env.REACT_APP_API_URL}/boba/` + server
+        const r = await fetch(url, {
             method: "GET",
         })
         const json = await r.json()
