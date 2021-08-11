@@ -4,7 +4,7 @@ const Person = (props) => {
 
     return (
         <div>
-            <p key={props.name}>{props.name} got boba {props.count} times</p>
+            <p key={props.name}>{props.name} got boba {props.count} {props.count === 1 ? "time" : "times"}</p>
         </div>
     )
 }

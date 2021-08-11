@@ -1,23 +1,33 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import Person from './Person';
+import { Input, Button } from 'semantic-ui-react'
 
 
 const Boba = () => {
     const [items, setItems] = useState(null)
+    const [server, setServer] = useState("")
+    const [error, setError] = useState(null)
 
     const getBoba = async () => {
-        const r = await fetch(`${process.env.REACT_APP_API_URL}/boba`, {
+        const url = "http://localhost:8000/boba/" + server
+        const r = await fetch(url, {  // `${process.env.REACT_APP_API_URL}/boba`
             method: "GET",
         })
         const json = await r.json()
         console.log(json)
-        setItems(json)
+        if ("error" in json) {
+            setError(json.error)
+        }
+        else {
+            setItems(json)
+        }
     }
 
     const displayCount = () => {
         if (items !== null) {
             return (
                 <div>
+                    <h1 class="boba">The boba count is:</h1>
                     {Object.keys(items).map((name) => (
                         <Person name={name} count={items[name]} />
                     ))}
@@ -26,15 +36,25 @@ const Boba = () => {
         }
     }
 
-    // call API on page load
-    useEffect(() => {
-        getBoba()
-    }, [])
+    const displayError = () => {
+        if (error !== null) {
+            return (
+                <div>
+                    <p class="error">{error}</p>
+                </div>
+            )
+        }
+    }
 
     return (
         <div>
-            <h1 class="boba">The boba count is:</h1>
+            <center>
+                <Input focus placeholder={"Search for a server"} value={server} onChange={(e) => setServer(e.target.value)}/>
+                <Button primary onClick={getBoba}>Search</Button>
+            </center>
+            
            {displayCount()}
+           {displayError()}
         </div>
     )
 }

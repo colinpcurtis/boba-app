@@ -50,3 +50,8 @@ p {
     color: black;
     font-size: x-large;
 }
+
+p.error {
+    color: red;
+    text-align: center;
+}
